@@ -1,0 +1,22 @@
+meta {
+  name: User registers
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/register
+  body: formUrlEncoded
+  auth: inherit
+}
+
+body:form-urlencoded {
+  name: {{$randomFirstName}} {{$randomLastName}}
+  email: {{randomEmailLowerCase}}
+  password: password
+  password_confirmation: password
+}
+
+settings {
+  encodeUrl: true
+}

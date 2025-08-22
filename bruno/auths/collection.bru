@@ -1,0 +1,17 @@
+vars:pre-request {
+  base_url: http://localhost:8000
+}
+
+script:pre-request {
+  const email = bru.interpolate('{{$randomEmail}}');
+  bru.setVar('randomEmailLowerCase', email.toLowerCase());
+  
+  const jar = bru.cookies.jar();
+  const token = await jar.getCookie("{{base_url}}/sanctum/csrf-cookie", 'XSRF-TOKEN');
+  
+  req.setHeaders({
+    "X-XSRF-TOKEN": decodeURIComponent(token.value),
+    "Content-Type" : "application/x-www-form-urlencoded"
+  });
+  
+}
