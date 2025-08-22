@@ -30,6 +30,13 @@ return new class extends Migration
             $table->foreignId('student_id')->constrained('users')->onDelete('cascade'); // user.is_educator -> false
             $table->timestamps();
         });
+
+        Schema::create('course_subjects', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('subject_id')->constrained()->onDelete('cascade');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -37,6 +44,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('subject_educators');
+        Schema::dropIfExists('subject_students');
+        Schema::dropIfExists('course_subjects');
         Schema::dropIfExists('subjects');
+        
     }
 };

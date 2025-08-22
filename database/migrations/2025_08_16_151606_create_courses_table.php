@@ -18,13 +18,6 @@ return new class extends Migration
             $table->timestamps();
         });
         
-        Schema::create('course_subjects', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
-            $table->foreignId('subject_id')->constrained('')->onDelete('cascade');
-            $table->timestamps();
-        });
-        
     }
 
     /**
